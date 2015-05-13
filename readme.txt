@@ -28,8 +28,8 @@ Save one at a time, or save all changes with one click
 
 
 == Frequently Asked Questions ==
-On-Page Ranking Factors
-http://moz.com/learn/seo/on-page-factors
+On-Page Ranking Factors : http://moz.com/learn/seo/on-page-factors
+Free SEO Scan : http://www.seo-detective.com/
 
 Image Alt Attribute is relevant for SEO
 
