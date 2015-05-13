@@ -4,7 +4,7 @@ Plugin Name: BULK SEO Image
 Plugin URI: http://www.seoelite.pw
 Description: Easily update all the ALT attribute of your images. Can add the Article Name automatically to all your images improving traffic from search engines.
 Author: SEOelite
-Version: 1.0
+Version: 1.1
 Author URI: http://www.seoelite.pw
 */
 function BulkSeoImage() {
