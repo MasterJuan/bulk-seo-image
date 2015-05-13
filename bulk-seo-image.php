@@ -14,12 +14,15 @@ function BulkSeoImage() {
 	?>
 	<div class="wrap">
 	<h2>BULK SEO Image (Configuration)</h2>
+	<a href="http://www.a2hosting.com/5787-19-1-182.html" target="_blank"><img style="border:0px" src="https://affiliates.a2hosting.com/media/banners/1-CLICK468X60 - wp.png" width="468" height="60" alt=""></a>
 	<form method="post" id="BulkSeoImage">
 			<h2>General Options</h2>
-<p>SEO Friendly Images automatically adds ALT attributes to all your images in all your posts specified by parameters below.</p>
-<br><b>Note: The plugin works by modyfying the image HTML in your media library.</b>
-					<u>Example </u>: <span style="color:green">%PostName%</span> : My Post, <span style="color:blue">%CurrentSiteName%</span> : <?php echo get_bloginfo('name'); ?>, <span style="color:orange">$i</span> : Image Number
-					<table border="1">
+<p>BULK SEO Image will automatically update ALT attributes to all your images in all your posts/pages specified by parameters below.</p>
+<br><b>New option</b> :  you want to update... Post+Page <input type="radio" name="option1" value="3"> 
+										- Post <input type="radio" name="option1" value="1" checked> 
+										- Page <input type="radio" name="option1" value="2"> 
+					<br><br><u>Example </u>: <span style="color:green">%PostName%</span> : My Post, <span style="color:blue">%CurrentSiteName%</span> : <?php echo get_bloginfo('name'); ?>, <span style="color:orange">$i</span> : Image Number
+					<br><table border="1">
 						<tr><td><b>Choice</b></td><td><b>Example ALT Attribute Value</b></td></tr>
 						<tr><td><input type="radio" name="choice" value="1"> <span style="color:green">%PostName%</span></td><td>My Post</td></tr>
 						<tr><td><input type="radio" name="choice" value="2"> <span style="color:blue">%CurrentSiteName%</span> <span style="color:green">%PostName%</span></td><td><?php echo get_bloginfo('name'); ?> My Post</td></tr>
@@ -54,14 +57,17 @@ function BulkSeoImage() {
 
 	</form>
 	
-<br><hr>Do you like this plugin ? why not make a (small) donation. Thank you !!
+<br><hr>
+You are a webdesigner ? Help us to improve the design of this plugin (<a href="http://www.seoelite.pw/" target="_blank">contact</a>)
+<br>Do you like this plugin ? why not make a (small) donation. Thank you !!
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="TCXXBFZEAZW5C">
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
 <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
 </form>
-
+<hr>
+<a href="http://www.a2hosting.com/5787-19-1-184.html" target="_blank"><img style="border:0px" src="https://affiliates.a2hosting.com/media/banners/234X60 - wp.png" width="234" height="60" alt=""></a>
 	</div>
 	<?php
 
@@ -77,64 +83,77 @@ try { while( @ob_end_flush() ); } catch( Exception $e ) {}
 ob_start();
 	
 $choice=(int)$_POST['choice'];
-$results = $wpdb->get_results("SELECT * FROM $wpdb->prefix".posts." WHERE post_status = 'publish' AND post_type='post'");
-if (empty ($results)) {
-	return false;
-} else {	
-		echo '<h1>Result</h1><table border="1">
-			<tr><td><b>(id) Article</b></td><td><b>OLD ALT</b></td><td><b>NEW ALT</b></td></tr>';	ob_flush(); flush();
-		
-		foreach ($results as $result) { 		
-				$attachments = get_attached_media('image', $result->ID );
-				$countarray=count($attachments);
-				$i=1;
-				foreach ($attachments as $attachment) {
-					echo '<tr><td><b>('.$result->ID.') '.$result->post_title.'</b></td><td>';  ob_flush(); flush();
-					$alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
-					echo $alt;  ob_flush(); flush();
-					if($countarray>1){
-						if($choice>9 AND $choice != 14) { $ii='image '.$i; }else{ $ii=$i;} 
-					}else{
-						$ii='';
-					}				
-					switch($choice){
-						case 1:  	$text_alt_display =  $result->post_title;   break; 
-						case 14:  	$text_alt_display =  $result->post_title.' '.$ii;   break; 
-						case 2:  	$text_alt_display =  get_bloginfo('name').' '.$result->post_title;   break;
-						case 3:  	$text_alt_display =  $result->post_title.' '.get_bloginfo('name');   break;
-						case 4:  	$text_alt_display =  get_bloginfo('name').' | '.$result->post_title;   break;
-						case 5:  	$text_alt_display =  $result->post_title.' | '.get_bloginfo('name');   break;						
-						case 6:		$text_alt_display =  get_bloginfo('name').' '.$result->post_title.' '.$ii;   break;
-						case 10:  	$text_alt_display =  get_bloginfo('name').' '.$result->post_title.' '.$ii;   break;
-						case 7:		$text_alt_display =  $result->post_title.' '.get_bloginfo('name').' '.$ii;   break;
-						case 11:  	$text_alt_display =  $result->post_title.' '.get_bloginfo('name').' '.$ii;   break;
-						case 8:		$text_alt_display =  get_bloginfo('name').' | '.$result->post_title.' '.$ii;   break;
-						case 12:	$text_alt_display =  get_bloginfo('name').' | '.$result->post_title.' '.$ii;   break;
-						case 9:		$text_alt_display =  $result->post_title.' | '.get_bloginfo('name').' '.$ii;   break;			
-						case 13:	$text_alt_display =  $result->post_title.' | '.get_bloginfo('name').' '.$ii;   break;	
-						default :   $text_alt_display =  $result->post_title;   break; 
-					}
+$option1=(int)$_POST['option1'];
 
-					if(!empty($alt) AND $_POST['override']!=TRUE){ 
-						$text_alt_display = '-';
-					}else{
-						update_post_meta($attachment->ID, '_wp_attachment_image_alt',$text_alt_display);
-					}
-					echo '</td><td>'.$text_alt_display.'</td></tr>';  ob_flush(); flush();
-					++$i;
-				}	
-		}
-		echo '</table>'; ob_flush(); flush();
-	}
+switch($option1){
+	case 1:  	BulkSeoImageGo('post',$choice);   break; 
+	case 2:  	BulkSeoImageGo('page',$choice);   break; 
+	case 3:  	BulkSeoImageGo('post',$choice);  BulkSeoImageGo('page',$choice); break; 
 }
 
-function dashboard() {
+
+
+}
+
+function dashboardBulkSeoImage() {
 	if (function_exists('add_options_page')) {
 	add_options_page('Bulk SEO Image', 'Bulk SEO Image', 'manage_options', basename(__FILE__), 'BulkSeoImage');
 	}
 }
 
+	function BulkSeoImageGo($param,$choice){
+		global $wpdb;
+		$results = $wpdb->get_results("SELECT * FROM `{$wpdb->base_prefix}posts` WHERE post_status = 'publish' AND post_type='".$param."'");
+		if (empty ($results)) {
+			return false;
+		} else {	
+				echo '<h1>Result ('.$param.')</h1><table border="1">
+					<tr><td><b>(id) Article</b></td><td><b>OLD ALT</b></td><td><b>NEW ALT</b></td></tr>';	ob_flush(); flush();
+				
+				foreach ($results as $result) { 		
+						$attachments = get_attached_media('image', $result->ID );
+						$countarray=count($attachments);
+						$i=1;
+						foreach ($attachments as $attachment) {
+							echo '<tr><td><b>('.$result->ID.') '.$result->post_title.'</b></td><td>';  ob_flush(); flush();
+							$alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+							echo $alt;  ob_flush(); flush();
+							if($countarray>1){
+								if($choice>9 AND $choice != 14) { $ii='image '.$i; }else{ $ii=$i;} 
+							}else{
+								$ii='';
+							}				
+							switch($choice){
+								case 1:  	$text_alt_display =  $result->post_title;   break; 
+								case 14:  	$text_alt_display =  $result->post_title.' '.$ii;   break; 
+								case 2:  	$text_alt_display =  get_bloginfo('name').' '.$result->post_title;   break;
+								case 3:  	$text_alt_display =  $result->post_title.' '.get_bloginfo('name');   break;
+								case 4:  	$text_alt_display =  get_bloginfo('name').' | '.$result->post_title;   break;
+								case 5:  	$text_alt_display =  $result->post_title.' | '.get_bloginfo('name');   break;						
+								case 6:		$text_alt_display =  get_bloginfo('name').' '.$result->post_title.' '.$ii;   break;
+								case 10:  	$text_alt_display =  get_bloginfo('name').' '.$result->post_title.' '.$ii;   break;
+								case 7:		$text_alt_display =  $result->post_title.' '.get_bloginfo('name').' '.$ii;   break;
+								case 11:  	$text_alt_display =  $result->post_title.' '.get_bloginfo('name').' '.$ii;   break;
+								case 8:		$text_alt_display =  get_bloginfo('name').' | '.$result->post_title.' '.$ii;   break;
+								case 12:	$text_alt_display =  get_bloginfo('name').' | '.$result->post_title.' '.$ii;   break;
+								case 9:		$text_alt_display =  $result->post_title.' | '.get_bloginfo('name').' '.$ii;   break;			
+								case 13:	$text_alt_display =  $result->post_title.' | '.get_bloginfo('name').' '.$ii;   break;	
+								default :   $text_alt_display =  $result->post_title;   break; 
+							}
 
-add_action('admin_menu','dashboard');
+							if(!empty($alt) AND $_POST['override']!=TRUE){ 
+								$text_alt_display = '-';
+							}else{
+								update_post_meta($attachment->ID, '_wp_attachment_image_alt',$text_alt_display);
+							}
+							echo '</td><td>'.$text_alt_display.'</td></tr>';  ob_flush(); flush();
+							++$i;
+						}	
+				}
+				echo '</table>'; ob_flush(); flush();
+			}
+		}
+		
+add_action('admin_menu','dashboardBulkSeoImage');
 
 ?>
